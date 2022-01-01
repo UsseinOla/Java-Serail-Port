@@ -14,22 +14,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafxapplication1.JavaFXApplication1;
-public class GUIserialPort extends javax.swing.JFrame implements ActionListener {
-    
-    
+
+public class GUIserialPort extends javax.swing.JFrame implements ActionListener 
+{
 static SerialPort chosenPort;
 SerialPort[] portNames = SerialPort.getCommPorts();  
 String str;
-public GUIserialPort() {
- 
-    
-    initComponents();     
-    
-    
-for(int i = 0; i < portNames.length; i++){
+
+public GUIserialPort()
+{
+initComponents();     
+   
+for(int i = 0; i < portNames.length; i++)
+{
 ComboBox.addItem(portNames[i].getSystemPortName());
 }
-              
 }
 
     /**
@@ -39,8 +38,8 @@ ComboBox.addItem(portNames[i].getSystemPortName());
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
+    private void initComponents() 
+    {
         jScrollBar1 = new javax.swing.JScrollBar();
         jLabel2 = new javax.swing.JLabel();
         ComboBox = new javax.swing.JComboBox();
@@ -56,24 +55,24 @@ ComboBox.addItem(portNames[i].getSystemPortName());
         jLabel4 = new javax.swing.JLabel();
         scarretchart = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-
         jLabel2.setText("jLabel2");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Snapchat For Sensor Nodes Estimation Positions"); // NOI18N
         setAlwaysOnTop(true);
-
-        ComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ComboBox.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ComboBoxActionPerformed(evt);
             }
         });
 
         jLabel1.setText("No Data Available ");
-
         connection.setText("Connection");
-        connection.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        connection.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 connectionActionPerformed(evt);
             }
         });
@@ -84,10 +83,12 @@ ComboBox.addItem(portNames[i].getSystemPortName());
         TextArea.setRows(5);
         TextArea.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jScrollPane1.setViewportView(TextArea);
-
         save.setText("Save Data");
-        save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        
+        save.addActionListener(new java.awt.event.ActionListener() 
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 saveActionPerformed(evt);
             }
         });
@@ -97,27 +98,29 @@ ComboBox.addItem(portNames[i].getSystemPortName());
         savetext.setForeground(new java.awt.Color(255, 255, 0));
         savetext.setRows(5);
         jScrollPane2.setViewportView(savetext);
-
         deletetext.setText("Clear Data");
-        deletetext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        
+        deletetext.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deletetextActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Currently Read DATA From Serial Port");
-
         jLabel4.setText("Collect  An Incoming DATA");
-
         scarretchart.setText("Plot (X,Y)");
-        scarretchart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        
+        scarretchart.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 scarretchartActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Port");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,7 +156,6 @@ ComboBox.addItem(portNames[i].getSystemPortName());
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ComboBox, connection, deletetext, save, scarretchart});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -179,7 +181,6 @@ ComboBox.addItem(portNames[i].getSystemPortName());
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ComboBox, connection, jLabel5, save});
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,8 +189,8 @@ ComboBox.addItem(portNames[i].getSystemPortName());
     }//GEN-LAST:event_ComboBoxActionPerformed
 
     private void connectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectionActionPerformed
-connection.addActionListener(new ActionListener(){
-    
+connection.addActionListener(new ActionListener()
+{
 
 @Override public void actionPerformed(ActionEvent arg0) {
 if(connection.getText().equals("Connection")) {
@@ -197,17 +198,19 @@ chosenPort = SerialPort.getCommPort(ComboBox.getSelectedItem().toString());
 chosenPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
 chosenPort.setComPortParameters(115200, 8, 1, SerialPort.NO_PARITY);
 
-if(chosenPort.openPort()) {
+if(chosenPort.openPort())
+{
 connection.setText("Disconnect");
-  jLabel1.setText("The COM Port used is:"+ComboBox.getSelectedItem().toString());
+jLabel1.setText("The COM Port used is:"+ComboBox.getSelectedItem().toString());
 ComboBox.setEnabled(false);
 }
 
-  
-
-Thread thread = new Thread(){
-@Override public void run() {
- while (chosenPort.isOpen()){
+Thread thread = new Thread()
+{
+@Override public void run()
+{
+ while (chosenPort.isOpen())
+ {
      int total=chosenPort.bytesAvailable();
      System.out.println(total);
  byte[] readBuffer= new byte[total];
@@ -220,40 +223,44 @@ str=TextArea.getText();
 savetext.append(str+"\n");
 }
 
-try {
+try 
+{
 Thread.sleep(2000);
-} catch (InterruptedException ex) {
+} 
+catch (InterruptedException ex) 
+{
 Logger.getLogger(GUIserialPort.class.getName()).log(Level.SEVERE, null, ex);
 }
-
-}
-    
+}  
 }
 };
 thread.start();
 } 
-else {
+else 
+{
 chosenPort.closePort();
 ComboBox.setEnabled(true);
 TextArea.setText("");
 connection.setText("connection");
 }
-
 }
 });
-    }//GEN-LAST:event_connectionActionPerformed
+}//GEN-LAST:event_connectionActionPerformed
 
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
 FileWriter out;
-try {
+
+try 
+{
 out = new FileWriter("C:\\Users\\User\\Desktop\\store.txt");
 out.write(savetext.getText()+"\n");
 out.close();
-
-} catch(IOException e) {  
+} 
+catch(IOException e) 
+{  
 System.out.println("Error appending to file " + "Temp.txt");
 }
-    }//GEN-LAST:event_saveActionPerformed
+}//GEN-LAST:event_saveActionPerformed
 
     private void deletetextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletetextActionPerformed
        savetext.setText("");
@@ -272,29 +279,41 @@ System.out.println("Error appending to file " + "Temp.txt");
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try 
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) 
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } 
+        catch (ClassNotFoundException ex) 
+        {
             java.util.logging.Logger.getLogger(GUIserialPort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } 
+        catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(GUIserialPort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } 
+        catch (IllegalAccessException ex) 
+        {
             java.util.logging.Logger.getLogger(GUIserialPort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } 
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(GUIserialPort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIserialPort().setVisible(true);
-                
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run() 
+            {
+                new GUIserialPort().setVisible(true);             
             }
         });
     }
@@ -318,7 +337,8 @@ System.out.println("Error appending to file " + "Temp.txt");
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void actionPerformed(ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae) 
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
