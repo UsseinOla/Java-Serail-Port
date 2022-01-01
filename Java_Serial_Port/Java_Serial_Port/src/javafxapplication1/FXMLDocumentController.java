@@ -22,13 +22,12 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 
-
-
 /**
  *
  * @author User
  */
-public class FXMLDocumentController implements Initializable {
+public class FXMLDocumentController implements Initializable 
+{
 BufferedReader read;  
  String[] save; 
   String[] xdata;
@@ -36,79 +35,86 @@ BufferedReader read;
   String[] Name;
  String[] save1; 
  
-
     @FXML
     private ScatterChart<?, ?> ScatterChart;
 
-  
-
-    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
  XYChart.Series series=new XYChart.Series();
  XYChart.Series series2=new XYChart.Series();
 
 int i=0;
-  
+
 File file =new File("C:\\Users\\User\\Desktop\\store.txt");
-try {
+
+try
+{
 read = new BufferedReader (new FileReader(file));
-} catch (FileNotFoundException ex) {
+}
+catch (FileNotFoundException ex)
+{
 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
 }
-try {
+try
+{
 save = new String[read.readLine().length()];
-} catch (IOException ex) {
+}
+catch (IOException ex)
+{
 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
 }
 String str=null;
-try {
-while((str=read.readLine()) !=null )  {
-if(str.contains("hu")){
+
+try
+{
+while((str=read.readLine()) !=null )
+{
+if(str.contains("hu"))
+{
 String[] data=str.split(",",7);
 
-if (data!=null){
+if (data!=null)
+{
 save[i]=data[1]+","+data[3]+","+data[5];//Arrays.toString(data)
 i++;
 }else{
 i--;
 }
 }
-else{
+else
+{
 continue;
 }
-}} catch (IOException ex) {
+}
+}
+catch (IOException ex) 
+{
 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
 }
+
 String[] xdata= new String[i];
 String[] ydata=new String[i];
 String[] Name=new String[i];
-for(int r=0;r<i;r++){    
+
+for(int r=0;r<i;r++)
+{    
 //System.out.println(save[r]+"\n");         
 String[] exploied=  save[r].split(",",3);
+
 /*System.out.print(exploied[0]+"\n");
 System.out.print(exploied[1]+"\n");
 System.out.print(exploied[2]+"\n");*/
-Name[r]=exploied[0];
-        
+Name[r]=exploied[0];    
 xdata[r]=exploied[1];
 ydata[r]=exploied[2];
 }
-
-
-for(int data=0;data<i;data++){
-
+for(int data=0;data<i;data++)
+{
 series.getData().add(new XYChart.Data(xdata[data],Double.parseDouble(ydata[data])));
 }
-
-
-
-
-
+     
 ScatterChart.setTitle("Compute Error to each ID");
 ScatterChart.getData().addAll(series);  
-//ScatterChart.setStyle("-fx-background-color: gray");
-
 }    
-    
 }
